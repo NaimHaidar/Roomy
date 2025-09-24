@@ -14,10 +14,10 @@
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
 </head>
 
 <body>
+  <script src="../assets/js/plugins/redirect.js"></script>
   <div class="wrapper">
     <div class="sidebar" data-color="black" data-active-color="danger">
       <div class="logo">
@@ -98,7 +98,11 @@
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
            
             <ul class="navbar-nav">
-              
+               <li class="nav-item">
+                <a id="name" class="navbar-brand" href="">
+                  
+                </a>
+              </li>
               <li class="nav-item btn-rotate dropdown">
                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-bell-55"></i>
@@ -112,12 +116,14 @@
                   <a class="dropdown-item" href="#">Something else here</a>
                 </div>
               </li>
+             
               <li class="nav-item">
-                <a class="nav-link btn-rotate" href="javascript:;">
-                  <i class="nc-icon nc-settings-gear-65"></i>
+                <a class="nav-link btn-rotate" id="logoutBtn" href="">
+                  <i class="nc-icon nc-user-run"></i>
                   <p>
-                    <span class="d-lg-none d-md-block">Account</span>
+                    <span class="d-lg-none d-md-block">Logout</span>
                   </p>
+                  
                 </a>
               </li>
             </ul>
@@ -201,10 +207,11 @@
       </div>
     </div>
   </div>
+  <script src="../assets/js/plugins/logout.js"></script>
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.5/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
 </body>
 </html>

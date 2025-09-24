@@ -5,9 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const passwordInput = document.getElementById('password');
     const userId= localStorage.getItem('userId');
     const accessToken = localStorage.getItem('accessToken');
-    if (userId && accessToken) {
-        window.location.href = 'dashboard.html';
-    }
+   
     loginForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 

@@ -6,89 +6,47 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../assets/img/favicon.png">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-  <title>
-    Room Management - Minutes Management
-  </title>
+  <title>Room Management - Minutes Management</title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
   <style>
-    .form-group .badge {
-      margin-right: 5px;
-      margin-bottom: 5px;
+    .content {
+      height: 100%;
     }
-    .file-upload-area {
-      border: 2px dashed #666;
-      padding: 30px;
-      text-align: center;
-      border-radius: 5px;
-    }
+    .card-body textarea { resize: none; }
+    .table-actions button { margin-right: 5px; }
   </style>
 </head>
 
 <body>
+  <script src="../assets/js/plugins/redirect.js"></script>
   <div class="wrapper">
     <div class="sidebar" data-color="black" data-active-color="danger">
       <div class="logo">
         <a href="login.html" class="simple-text logo-mini">
           <div class="logo-image-small">
-            <img src="../assets/img/logo-small.png">
+            <img src="../assets/img/logo-small.png" alt="Logo">
           </div>
         </a>
-        <a href="dashboard.html" class="simple-text logo-normal">
-          Roomly
-        </a>
+        <a href="dashboard.html" class="simple-text logo-normal">Roomly</a>
       </div>
       <div class="sidebar-wrapper">
         <ul class="nav">
-          <li>
-            <a href="login.html">
-              <i class="nc-icon nc-key-25"></i>
-              <p>Login Screen</p>
-            </a>
-          </li>
-          <li>
-            <a href="dashboard.html">
-              <i class="nc-icon nc-bank"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          <li>
-            <a href="meetingBooking.html">
-              <i class="nc-icon nc-book-bookmark"></i>
-              <p>Meeting Booking</p>
-            </a>
-          </li>
-          <li>
-            <a href="meeting.html">
-              <i class="nc-icon nc-time-alarm"></i>
-              <p>Active Meetings</p>
-            </a>
-          </li>
-          <li class="active">
-            <a href="minutes.html">
-              <i class="nc-icon nc-single-copy-04"></i>
-              <p>Minutes Management</p>
-            </a>
-          </li>
-          <li>
-            <a href="postMeetingMinute.html">
-              <i class="nc-icon nc-bullet-list-67"></i>
-              <p>Post-Meeting Minutes</p>
-            </a>
-          </li>
-          <li>
-            <a href="admin.html">
-              <i class="nc-icon nc-settings"></i>
-              <p>Admin Panel</p>
-            </a>
-          </li>
+          <li><a href="login.html"><i class="nc-icon nc-key-25"></i><p>Login Screen</p></a></li>
+          <li><a href="dashboard.html"><i class="nc-icon nc-bank"></i><p>Dashboard</p></a></li>
+          <li><a href="meetingBooking.html"><i class="nc-icon nc-book-bookmark"></i><p>Meeting Booking</p></a></li>
+          <li><a href="meeting.html"><i class="nc-icon nc-time-alarm"></i><p>Active Meetings</p></a></li>
+          <li class="active"><a href="minutes.html"><i class="nc-icon nc-single-copy-04"></i><p>Minutes Management</p></a></li>
+          <li><a href="postMeetingMinute.html"><i class="nc-icon nc-bullet-list-67"></i><p>Post-Meeting Minutes</p></a></li>
+          <li><a href="admin.html"><i class="nc-icon nc-settings"></i><p>Admin Panel</p></a></li>
         </ul>
       </div>
     </div>
+
     <div class="main-panel" style="height:100%;">
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
         <div class="container-fluid">
@@ -102,21 +60,22 @@
             </div>
             <a class="navbar-brand" href="javascript:;">Minutes Management</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
+
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-           
             <ul class="navbar-nav">
-              
+              <li class="nav-item"><a id="name" class="navbar-brand" href="#"></a></li>
               <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-bell-55"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Some Actions</span>
-                  </p>
+                  <p><span class="d-lg-none d-md-block">Some Actions</span></p>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                   <a class="dropdown-item" href="#">Action</a>
@@ -125,74 +84,87 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a class="nav-link btn-rotate" href="javascript:;">
-                  <i class="nc-icon nc-settings-gear-65"></i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Account</span>
-                  </p>
-                </a>
+                <a class="nav-link btn-rotate" id="logoutBtn" href="#"><i class="nc-icon nc-user-run"></i>
+                  <p><span class="d-lg-none d-md-block">Logout</span></p></a>
               </li>
             </ul>
           </div>
         </div>
       </nav>
+
       <div class="content">
         <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-6">
             <div class="card">
-              <div class="card-header">
-                <h4 class="card-title">Meeting Minutes Template</h4>
-              </div>
+              <div class="card-header"><h4 class="card-title">Add / Edit Minutes</h4></div>
               <div class="card-body">
-                <form>
+                <form id="minutesForm">
+                  <input type="hidden" id="minuteId">
                   <div class="form-group">
-                    <label>Attendees</label>
-                    <p class="form-text">
-                      <span class="badge badge-info">John Doe</span>
-                      <span class="badge badge-info">Jane Smith</span>
-                    </p>
-                    <input type="search" class="form-control" placeholder="Add new attendees">
+                    <label>Minute Type</label>
+                    <input type="text" class="form-control" id="type" placeholder="Decision / Action Item">
                   </div>
                   <div class="form-group">
-                    <label>Agenda Items</label>
-                    <textarea class="form-control" rows="5">1. Project status update
-2. Q3 Goals review
-3. Action items from last meeting</textarea>
+                    <label>Meeting</label>
+                    <select class="form-control" id="meetingSelect"></select>
                   </div>
                   <div class="form-group">
-                    <label>Decisions/Action Items</label>
-                    <div class="card-body bg-light-gray rounded p-3 mb-2">
-                        <p class="mb-1"><strong>Action:</strong> Finalize the Q3 budget proposal.</p>
-                        <p class="text-muted small"><strong>Assigned to:</strong> Jane Smith</p>
-                    </div>
-                    <div class="card-body bg-light-gray rounded p-3 mb-2">
-                        <p class="mb-1"><strong>Decision:</strong> The team will use the new project management tool.</p>
-                    </div>
-                    <textarea class="form-control mt-2" rows="3" placeholder="Add new decision or action item"></textarea>
+                    <label>Minute Body</label>
+                    <textarea class="form-control" id="body" rows="3"></textarea>
                   </div>
                   <div class="form-group">
-                    <label>Attachments</label>
-                    <div class="file-upload-area">
-                      <p class="text-muted">Drag and drop files here or click to upload</p>
-                      <input type="file" multiple class="d-none">
-                    </div>
+                    <label>Creation Date</label>
+                    <input type="date" class="form-control" id="creationDate" readonly>
                   </div>
-                  <div class="update ml-auto mr-auto">
-                    <button type="button" class="btn btn-secondary btn-round">Save Draft</button>
-                    <button type="submit" class="btn btn-primary btn-round">Finalize & Share</button>
+                  <div class="form-group">
+                    <label>Deadline Date</label>
+                    <input type="date" class="form-control" id="deadlineDate">
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6"><button type="submit" class="btn btn-primary btn-round">Save</button></div>
+                    <div class="col-md-6"><button type="button" class="btn btn-secondary btn-round" id="resetForm">Reset</button></div>
                   </div>
                 </form>
               </div>
             </div>
           </div>
+
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h4 class="card-title">All Minutes</h4>
+                <select class="form-control col-md-4" id="filterMeeting">
+                  <option value="">All Meetings</option>
+                </select>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Type</th>
+                        <th>Meeting</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="minutesTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
   </div>
+
+  <script src="../assets/js/plugins/logout.js"></script>
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
   <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
+  <script src="../assets/js/minutes.js"></script>
 </body>
 </html>

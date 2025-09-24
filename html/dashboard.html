@@ -10,11 +10,11 @@
     Room Management - Dashboard
   </title>
   <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
   <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
   <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
-  <link href="../assets/demo/demo.css" rel="stylesheet" />
   <style>
     .calendar-day {
       background-color: #333333;
@@ -24,56 +24,76 @@
       text-align: center;
       margin: 2px;
     }
-    .calendar-day.available { background-color: #4CAF50; }
-    .calendar-day.booked { background-color: #f44336; }
+
+    .calendar-day.available {
+      background-color: #4CAF50;
+    }
+
+    .calendar-day.booked {
+      background-color: #f44336;
+    }
+
     .quick-actions .btn {
       margin-right: 10px;
     }
+
     .upcoming-meeting-item {
       cursor: pointer;
     }
+
     .upcoming-meeting-item:hover .upcoming-meeting-label {
       background-color: #e9ecef;
+      color: #212529;
     }
+
     input[type="radio"] {
       display: none;
     }
-    input[type="radio"]:checked + label {
-      background-color: #6c757d; /* Gray for selected */
+
+    input[type="radio"]:checked+label {
+      background-color: #6c757d;
       border: 1px solid #6c757d;
       color: white;
     }
+
     .upcoming-meeting-label {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: .75rem 1.25rem;
       margin-bottom: -1px;
-      background-color: #ffffff; /* White for normal */
-      border: 1px solid rgba(0,0,0,.125);
+      background-color: #ffffff;
+      border: 1px solid rgba(0, 0, 0, .125);
       border-radius: 0.25rem;
       color: #212529;
       transition: background-color .2s ease-in-out;
     }
+
     .upcoming-meeting-label:not(:last-child) {
       margin-bottom: 5px;
     }
+
     .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 5px;
       text-align: center;
     }
-    .calendar-header, .calendar-time {
+
+    .calendar-header,
+    .calendar-time {
       font-weight: bold;
       padding: 5px;
     }
-    .calendar-day-label, .calendar-time {
+
+    .calendar-day-label,
+    .calendar-time {
       background-color: #303030;
       color: #9A9A9A;
       border-radius: 5px;
       padding: 10px;
     }
+
     .calendar-slot {
       background-color: #555;
       padding: 10px;
@@ -81,21 +101,31 @@
       cursor: pointer;
       position: relative;
     }
-    .calendar-slot.available { background-color: #4CAF50; }
-    .calendar-slot.booked { background-color: #f44336; }
+
+    .calendar-slot.available {
+      background-color: #4CAF50;
+    }
+
+    .calendar-slot.booked {
+      background-color: #f44336;
+    }
+
     .calendar-slot:hover {
       opacity: 0.8;
     }
+
     .calendar-legend {
       display: flex;
       gap: 15px;
       margin-top: 15px;
       justify-content: center;
     }
+
     .legend-item {
       display: flex;
       align-items: center;
     }
+
     .legend-item span {
       width: 15px;
       height: 15px;
@@ -103,18 +133,54 @@
       display: inline-block;
       margin-right: 5px;
     }
-    .legend-item .available { background-color: #4CAF50; }
-    .legend-item .booked { background-color: #f44336; }
+
+    .legend-item .available {
+      background-color: #4CAF50;
+    }
+
+    .legend-item .booked {
+      background-color: #f44336;
+    }
+
+    @media (max-width: 768px) {
+      .calendar-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 3px;
+      }
+
+      .calendar-day,
+      .calendar-slot {
+        padding: 5px;
+        font-size: 12px;
+      }
+
+      .quick-actions .btn {
+        margin-bottom: 5px;
+        width: 100%;
+      }
+
+      .card-header.d-flex {
+        flex-wrap: wrap;
+      }
+
+      #roomSelect {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
   </style>
 </head>
 
 <body>
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+  <script src="../assets/js/plugins/redirect.js"></script>
+
   <div class="wrapper">
     <div class="sidebar" data-color="black" data-active-color="danger">
       <div class="logo">
         <a href="login.html" class="simple-text logo-mini">
           <div class="logo-image-small">
-            <img src="../assets/img/logo-small.png">
+            <img src="../assets/img/logo-small.png" alt="Logo">
           </div>
         </a>
         <a href="dashboard.html" class="simple-text logo-normal">
@@ -168,6 +234,7 @@
         </ul>
       </div>
     </div>
+
     <div class="main-panel" style="height:100%;">
       <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
         <div class="container-fluid">
@@ -181,17 +248,22 @@
             </div>
             <a class="navbar-brand" href="javascript:;">Dashboard</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
+
           <div class="collapse navbar-collapse justify-content-end" id="navigation">
-           
             <ul class="navbar-nav">
-              
+              <li class="nav-item">
+                <a id="name" class="navbar-brand" href="#"></a>
+              </li>
               <li class="nav-item btn-rotate dropdown">
-                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
                   <i class="nc-icon nc-bell-55"></i>
                   <p>
                     <span class="d-lg-none d-md-block">Some Actions</span>
@@ -204,13 +276,10 @@
                 </div>
               </li>
               <li class="nav-item">
-                <a id="name" class="navbar-brand" href=""></a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link btn-rotate" href="javascript:;">
-                  <i class="nc-icon nc-settings-gear-65"></i>
+                <a class="nav-link btn-rotate" id="logoutBtn" href="#">
+                  <i class="nc-icon nc-user-run"></i>
                   <p>
-                    <span class="d-lg-none d-md-block">Account</span>
+                    <span class="d-lg-none d-md-block">Logout</span>
                   </p>
                 </a>
               </li>
@@ -218,6 +287,7 @@
           </div>
         </div>
       </nav>
+
       <div class="content">
         <div class="row">
           <div class="col-lg-3 col-md-6 col-sm-6">
@@ -232,14 +302,14 @@
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Total Rooms</p>
-                      <p class="card-title">15
-                      <p>
+                      <p class="card-title" id="roomCount"></p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
@@ -252,14 +322,14 @@
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Meetings Today</p>
-                      <p class="card-title">8
-                      <p>
+                      <p class="card-title" id="meetingsToday"></p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
@@ -272,14 +342,14 @@
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Users</p>
-                      <p class="card-title">42
-                      <p>
+                      <p class="card-title" id="userCount"></p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+
           <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
               <div class="card-body ">
@@ -292,8 +362,7 @@
                   <div class="col-7 col-md-8">
                     <div class="numbers">
                       <p class="card-category">Active Meetings</p>
-                      <p class="card-title">3
-                      <p>
+                      <p class="card-title" id="activeMeetings"></p>
                     </div>
                   </div>
                 </div>
@@ -301,6 +370,7 @@
             </div>
           </div>
         </div>
+
         <div class="row">
           <div class="col-md-12">
             <div class="card">
@@ -308,144 +378,43 @@
                 <h4 class="card-title">Upcoming Meetings</h4>
               </div>
               <div class="card-body">
-                <div>
-                  <div class="upcoming-meeting-item">
-                    <input type="radio" name="upcoming-meeting" id="meeting-1" class="d-none" checked>
-                    <label class="upcoming-meeting-label" for="meeting-1">
-                      Project Sync - Room 101
-                      <span class="badge badge-primary badge-pill">10:00 AM</span>
-                    </label>
-                  </div>
-                  <div class="upcoming-meeting-item">
-                    <input type="radio" name="upcoming-meeting" id="meeting-2" class="d-none">
-                    <label class="upcoming-meeting-label" for="meeting-2">
-                      Client Review - Conference Hall
-                      <span class="badge badge-primary badge-pill">2:00 PM</span>
-                    </label>
-                  </div>
-                  <div class="upcoming-meeting-item">
-                    <input type="radio" name="upcoming-meeting" id="meeting-3" class="d-none">
-                    <label class="upcoming-meeting-label" for="meeting-3">
-                      Design Huddle - Room 102
-                      <span class="badge badge-primary badge-pill">3:30 PM</span>
-                    </label>
-                  </div>
+                <div id="upcomingMeetingsList"></div>
+                <div class="card-body quick-actions">
+                  <button class="btn btn-warning btn-round">View Minutes</button>
                 </div>
-                 <div class="card-body quick-actions">
-                <button class="btn btn-primary btn-round">Schedule Meeting</button>
-                <button class="btn btn-info btn-round">Join Now</button>
-                <button class="btn btn-warning btn-round">View Minutes</button>
-              </div>
               </div>
             </div>
           </div>
-          
         </div>
-       
+
         <div class="row">
           <div class="col-md-12">
             <div class="card">
               <div class="card-header d-flex justify-content-between align-items-center">
                 <h4 class="card-title">Room Availability Calendar</h4>
                 <div class="col-md-4">
-                    <select class="form-control">
-                      <option>Conference Room 1</option>
-                      <option>Meeting Room A</option>
-                      <option>Meeting Room B</option>
-                      <option>Focus Booth 1</option>
-                    </select>
+                  <select class="form-control" id="roomSelect"></select>
                 </div>
               </div>
               <div class="card-body">
-                <div class="calendar-grid">
-                  <div class="calendar-header">Time</div>
-                  <div class="calendar-header">Mon</div>
-                  <div class="calendar-header">Tue</div>
-                  <div class="calendar-header">Wed</div>
-                  <div class="calendar-header">Thu</div>
-                  <div class="calendar-header">Fri</div>
-                  <div class="calendar-header">Sat</div>
-                  
-                  <div class="calendar-time">9 AM</div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-
-                  <div class="calendar-time">10 AM</div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-
-                  <div class="calendar-time">11 AM</div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  
-                  <div class="calendar-time">12 PM</div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  
-                  <div class="calendar-time">1 PM</div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-
-                  <div class="calendar-time">2 PM</div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  
-                  <div class="calendar-time">3 PM</div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-
-                  <div class="calendar-time">4 PM</div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                  <div class="calendar-slot booked"></div>
-                  <div class="calendar-slot available"></div>
-                </div>
-                <div class="calendar-legend">
-                  <div class="legend-item"><span class="available"></span>Available</div>
-                  <div class="legend-item"><span class="booked"></span>Booked</div>
-                </div>
+                <div id="calendar"></div>
               </div>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
+
+    <script src="../assets/js/plugins/logout.js"></script>
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
   <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/perfect-scrollbar/1.5.5/perfect-scrollbar.min.js"></script>
   <script src="../assets/js/paper-dashboard.min.js?v=2.0.1" type="text/javascript"></script>
+ 
   <script src="../assets/js/dashboard.js"></script>
 </body>
+
 </html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Edit Room - Admin Panel</title>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, shrink-to-fit=no" name="viewport" />
+  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/css/paper-dashboard.css?v=2.0.1" rel="stylesheet" />
+
+  <style>
+    .form-card { padding: 20px; }
+  </style>
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="sidebar" data-color="black" data-active-color="danger">
+    <div class="logo">
+      <a href="login.html" class="simple-text logo-mini">
+        <div class="logo-image-small">
+          <img src="../assets/img/logo-small.png" alt="Logo">
+        </div>
+      </a>
+      <a href="dashboard.html" class="simple-text logo-normal">Roomly</a>
+    </div>
+    <div class="sidebar-wrapper">
+      <ul class="nav">
+        <li><a href="login.html"><i class="nc-icon nc-key-25"></i><p>Login Screen</p></a></li>
+        <li><a href="dashboard.html"><i class="nc-icon nc-bank"></i><p>Dashboard</p></a></li>
+        <li><a href="meetingBooking.html"><i class="nc-icon nc-book-bookmark"></i><p>Meeting Booking</p></a></li>
+        <li><a href="meeting.html"><i class="nc-icon nc-time-alarm"></i><p>Active Meetings</p></a></li>
+        <li><a href="minutes.html"><i class="nc-icon nc-single-copy-04"></i><p>Minutes Management</p></a></li>
+        <li><a href="postMeetingMinute.html"><i class="nc-icon nc-bullet-list-67"></i><p>Post-Meeting Minutes</p></a></li>
+        <li class="active"><a href="admin.html"><i class="nc-icon nc-settings"></i><p>Admin Panel</p></a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="main-panel" style="height:100%;">
+    <nav class="navbar navbar-expand-lg navbar-absolute fixed-top navbar-transparent">
+      <div class="container-fluid">
+        <div class="navbar-wrapper">
+          <div class="navbar-toggle">
+            <button type="button" class="navbar-toggler" id="sidebarToggle">
+              <span class="navbar-toggler-bar bar1"></span>
+              <span class="navbar-toggler-bar bar2"></span>
+              <span class="navbar-toggler-bar bar3"></span>
+            </button>
+          </div>
+          <a class="navbar-brand" href="javascript:;">Edit Room</a>
+        </div>
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+          <span class="navbar-toggler-bar navbar-kebab"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navigation">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a id="name" class="navbar-brand" href="#"></a>
+            </li>
+            <li class="nav-item btn-rotate dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <i class="nc-icon nc-bell-55"></i>
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-rotate" id="logoutBtn" href="#">
+                <i class="nc-icon nc-user-run"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="content mt-5 pt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="card form-card">
+            <div class="card-header">
+              <h4 class="card-title">Edit Room</h4>
+            </div>
+            <div class="card-body">
+              <form id="editRoomForm">
+                <div class="form-group">
+                  <label for="roomName">Room Name</label>
+                  <input type="text" id="roomName" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="capacity">Capacity</label>
+                  <input type="number" id="capacity" class="form-control" required>
+                </div>
+                <div class="form-group">
+                  <label for="location">Location</label>
+                  <select id="location" class="form-control" required></select>
+                </div>
+                <div class="form-group">
+                  <label for="features">Features</label>
+                  <select id="features" class="form-control" multiple></select>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a href="admin.html" class="btn btn-secondary">Cancel</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="../assets/js/core/jquery.min.js"></script>
+<script src="../assets/js/core/popper.min.js"></script>
+<script src="../assets/js/core/bootstrap.min.js"></script>
+<script src="../assets/js/plugins/logout.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    const accessToken = localStorage.getItem('accessToken');
+    const params = new URLSearchParams(window.location.search);
+    const roomId = params.get('id');
+
+    if (!roomId) {
+        alert("No room ID provided.");
+        window.location.href = "admin.html";
+        return;
+    }
+
+    const nameEl = document.getElementById('name');
+
+    const roomNameInput = document.getElementById("roomName");
+    const capacityInput = document.getElementById('capacity');
+    const locationSelect = document.getElementById('location');
+    const featuresSelect = document.getElementById('features');
+
+    let room;
+    try {
+        const res = await fetch(`https://localhost:7203/Room/${roomId}`, {
+            headers: { 'Authorization': `Bearer ${accessToken}` }
+        });
+        if (!res.ok) throw new Error("Failed to fetch room.");
+        const rooms = await res.json();
+        if (!rooms || rooms.length === 0) throw new Error("Room not found.");
+        room = rooms[0]; 
+        roomNameInput.value = room.name;
+        capacityInput.value = room.capacity;
+    } catch (err) {
+        console.error(err);
+        alert("Could not load room info.");
+        window.location.href = "admin.html";
+        return;
+    }
+
+    async function loadLocations() {
+        try {
+            const res = await fetch('https://localhost:7203/Location', {
+                headers: { 'Authorization': `Bearer ${accessToken}` }
+            });
+            const locations = await res.json();
+            console.log("Fetched locations:", locations);
+            
+            locations.forEach(loc => {
+                const option = document.createElement('option');
+                option.value = loc.id;
+                option.textContent = loc.country+"-"+loc.city+"-"+loc.building+"-"+loc.floor;
+                locationSelect.appendChild(option);
+            });
+            locationSelect.value = room.locationId;
+        } catch (err) {
+            console.error("Failed to load locations:", err);
+        }
+    }
+
+    async function loadFeatures() {
+        try {
+            const res = await fetch('https://localhost:7203/Feature', {
+                headers: { 'Authorization': `Bearer ${accessToken}` }
+            });
+            const allFeatures = await res.json();
+            allFeatures.forEach(f => {
+                const option = document.createElement('option');
+                option.value = f.id;
+                option.textContent = f.feature1;
+                featuresSelect.appendChild(option);
+            });
+
+            const roomFeaturesRes = await fetch(`https://localhost:7203/Room/${roomId}/features`, {
+                headers: { 'Authorization': `Bearer ${accessToken}` }
+            });
+            const roomFeatures = await roomFeaturesRes.json();
+            const featureIds = roomFeatures.map(f => f.id.toString());
+            Array.from(featuresSelect.options).forEach(option => {
+                if (featureIds.includes(option.value)) option.selected = true;
+            });
+        } catch (err) {
+            console.error("Failed to load features:", err);
+        }
+    }
+
+    await loadLocations();
+    await loadFeatures();
+
+    document.getElementById('editRoomForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const updateData = {
+            id: parseInt(roomId, 10),
+            name: roomNameInput.value.trim(),
+            capacity: parseInt(capacityInput.value, 10),
+            locationId: parseInt(locationSelect.value, 10)
+        };
+
+        try {
+            const res = await fetch(`https://localhost:7203/Room`, { 
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${accessToken}`
+                },
+                body: JSON.stringify(updateData)
+            });
+            if (!res.ok) throw new Error("Failed to update room.");
+            const selectedFeatureIds = Array.from(featuresSelect.selectedOptions)
+                                .map(opt => parseInt(opt.value, 10));
+
+const batchPayload = selectedFeatureIds.map(fid => ({
+    featureId: fid,
+    roomId: parseInt(roomId, 10)
+}));
+
+const featuresRes = await fetch('https://localhost:7203/RoomFeature/batch', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+    },
+    body: JSON.stringify(batchPayload)
+});
+
+if (!featuresRes.ok) throw new Error("Failed to update room features.");
+            alert("Room updated successfully!");
+            window.location.href = "admin.html";
+
+        } catch (err) {
+            console.error(err);
+            alert(err.message);
+        }
+    });
+});
+</script>
+
+</body>
+</html>
